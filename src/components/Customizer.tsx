@@ -124,7 +124,6 @@ export const Customizer: React.FC = () => {
       <div className="card-content">
         <div className="customizer-grid" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px', marginBottom: '20px' }}>
           
-          {/* Preset Swatches */}
           <div className="presets-section">
             <h4>Quick Color Presets</h4>
             <div className="presets-list" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '8px' }}>
@@ -161,7 +160,6 @@ export const Customizer: React.FC = () => {
             </div>
           </div>
 
-          {/* Color Picker Sliders */}
           <div className="pickers-section">
             <h4>Fine Tune Variable Colors</h4>
             <div className="pickers-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>

@@ -11,8 +11,8 @@ export interface CustomThemeColors {
 }
 
 export interface ThemeState {
-  activeTheme: ThemeOption; // Selected theme option (can be 'system')
-  currentTheme: ThemeType;   // The theme currently applied ('light', 'dark', etc.)
+  activeTheme: ThemeOption;
+  currentTheme: ThemeType;
   customThemeColors: CustomThemeColors;
   animationsEnabled: boolean;
   soundsEnabled: boolean;

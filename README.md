@@ -1,32 +1,43 @@
-# React + TypeScript + Vite
+# Chroma Theme Lab
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+Chroma Theme Lab is a high-fidelity, production-grade global theming system built in React utilizing the Context API. It features multi-theme settings, OS-level integration, persistence, flash prevention, and advanced rendering performance optimizations.
 
-Currently, two official plugins are available:
+## Core Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- **Pill Theme Toggle**: Easily toggle between **Light**, **Dark**, and **System** sync preferences.
+- **OS Theme Integration**: Automatically matches system colors and listens for runtime OS preference transitions.
+- **No-Flash Painting**: Employs a synchronous inline script in `index.html` executing before the DOM paints to fetch preferences and append the appropriate class, resolving initial load flash.
+- **Responsive Layout**: Designed with a clean visual matching scheme, cards, responsive sidebars, custom checkboxes, forms, and alerts.
+- **Web Audio FX**: Incorporates soft, mechanical toggle sounds synthesized natively via Web Audio API oscillators.
+- **Dev Sandbox Panel**:
+  - **Render Performance Visualizer**: Live log logger and component ref trackers showing real-time render counts.
+  - **Custom Variables Customizer**: Sliders allowing developers to tweak color variables (`background`, `primary`, `surface`, `accent`, `text`) dynamically on a Custom Theme and export code directly.
 
-## React Compiler
+## Performance Optimization (Zero Re-renders)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+The application utilizes a **split-context pattern** to isolate rendering boundaries:
+- `ThemeStateContext`: Distributes state parameters. Subscribed components re-render when colors toggle.
+- `ThemeActionsContext`: Distributes state mutator functions (`setTheme`, `resetToSystem`). Components that only call actions (such as selector buttons or toggle clicks) do not subscribe to state, meaning they **never** trigger unnecessary visual repaints.
+- `Memoized panel`: Demonstrates how components that do not subscribe to the Context stay locked at **1 render** while styling is handled dynamically via CSS cascading classes.
 
-## Expanding the Oxlint configuration
+## CLI Scripts
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
+Initialize, compile, run, and test commands:
 
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+### Setup & Run
+```bash
+# Install packages
+npm install
+
+# Start local server
+npm run dev
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+### Checks & Tests
+```bash
+# Verify TypeScript type checks
+npx tsc --noEmit
+
+# Run Vitest unit tests
+npx vitest run
+```

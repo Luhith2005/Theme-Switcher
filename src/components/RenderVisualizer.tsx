@@ -50,7 +50,6 @@ export const RenderVisualizer: React.FC = () => {
   const renderCount = useRef(0);
   renderCount.current += 1;
 
-  // Add a log when the theme updates
   const lastTheme = useRef(state.currentTheme);
   useEffect(() => {
     const time = new Date().toLocaleTimeString();

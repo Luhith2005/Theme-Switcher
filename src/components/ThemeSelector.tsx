@@ -53,7 +53,6 @@ const ThemeCard: React.FC<ThemeCardProps> = ({
         outline: 'none',
       }}
     >
-      {/* Visual background glow for active cards */}
       {isActive && (
         <div className="card-accent-glow" />
       )}

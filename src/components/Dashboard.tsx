@@ -5,10 +5,6 @@ import { Customizer } from './Customizer';
 import { RenderVisualizer } from './RenderVisualizer';
 import { PaintbrushIcon, VolumeIcon } from './Icons';
 
-// The Memoized panel card.
-// It is wrapped in React.memo and takes no props.
-// It does not call useTheme or subscribe to theme context,
-// so it does NOT re-render when theme changes.
 export const MemoizedCard: React.FC = React.memo(() => {
   const renders = useRef(0);
   renders.current += 1;
@@ -27,7 +23,6 @@ export const MemoizedCard: React.FC = React.memo(() => {
   );
 });
 
-// A standard card to represent surface tokens.
 export const SurfaceTokensCard: React.FC = () => {
   const renders = useRef(0);
   renders.current += 1;
@@ -51,7 +46,6 @@ export const Dashboard: React.FC = () => {
   const actions = useThemeActions();
   const [showDevPanel, setShowDevPanel] = useState(false);
 
-  // Determine appearance state label
   const appearanceLabel = useMemo(() => {
     const active = state.activeTheme;
     const current = state.currentTheme;
@@ -67,7 +61,6 @@ export const Dashboard: React.FC = () => {
 
   return (
     <div className="chroma-lab-container">
-      {/* Sound toggle floating button */}
       <div className="floating-sound-control">
         <button
           type="button"
@@ -81,14 +74,12 @@ export const Dashboard: React.FC = () => {
       </div>
 
       <main className="chroma-main">
-        {/* Mockup Title Header */}
         <header className="chroma-header">
           <span className="assignment-num">ASSIGNMENT 7</span>
           <h1 className="main-title">Chroma theme lab</h1>
           <p className="subtitle">Context API · persistence · system sync · no flash</p>
         </header>
 
-        {/* Buttons Row */}
         <section className="controls-row">
           <div className="pill-selector">
             <button
@@ -127,18 +118,15 @@ export const Dashboard: React.FC = () => {
           </button>
         </section>
 
-        {/* Active Appearance Status */}
         <section className="status-row">
           <span>Active appearance: <span className="status-highlight">{appearanceLabel}</span></span>
         </section>
 
-        {/* Grid Cards Showcase */}
         <section className="cards-grid">
           <SurfaceTokensCard />
           <MemoizedCard />
         </section>
 
-        {/* Developer options divider */}
         <section className="dev-options-toggle-section">
           <button
             type="button"
@@ -165,7 +153,6 @@ export const Dashboard: React.FC = () => {
           </button>
         </section>
 
-        {/* Dynamic Dev Panel options */}
         {showDevPanel && (
           <div className="dev-panel-drawer animate-fade-in" style={{ display: 'grid', gridTemplateColumns: '1fr', gap: '24px', width: '100%', marginTop: '16px' }}>
             <Customizer />
