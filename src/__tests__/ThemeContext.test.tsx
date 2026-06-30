@@ -4,7 +4,6 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '../context/ThemeContext';
 import { useTheme, useThemeActions } from '../hooks/useTheme';
 
-// Helper mock matchMedia interface
 interface MockMediaQueryList {
   matches: boolean;
   media: string;
@@ -16,7 +15,6 @@ interface MockMediaQueryList {
   dispatchEvent: ReturnType<typeof vi.fn>;
 }
 
-// Global setup for matching media queries in jsdom
 let matchMediaListeners: ((e: any) => void)[] = [];
 let isSystemDark = false;
 
@@ -54,7 +52,6 @@ describe('Theme Switcher System', () => {
     vi.unstubAllGlobals();
   });
 
-  // Test Component that consumes theme state and actions
   const TestThemeComponent = () => {
     const state = useTheme();
     const actions = useThemeActions();
@@ -115,9 +112,8 @@ describe('Theme Switcher System', () => {
     );
 
     expect(screen.getByTestId('active').textContent).toBe('system');
-    expect(screen.getByTestId('applied').textContent).toBe('light'); // system dark is false
+    expect(screen.getByTestId('applied').textContent).toBe('light');
 
-    // Simulate system change to Dark Mode
     isSystemDark = true;
     act(() => {
       matchMediaListeners.forEach(listener => listener({ matches: true } as any));
@@ -133,20 +129,18 @@ describe('Theme Switcher System', () => {
       </ThemeProvider>
     );
 
-    fireEvent.click(screen.getByTestId('set-dark')); // Manually override to dark
+    fireEvent.click(screen.getByTestId('set-dark'));
     expect(screen.getByTestId('active').textContent).toBe('dark');
 
-    // Simulate system change to Light Mode
     isSystemDark = false;
     act(() => {
       matchMediaListeners.forEach(listener => listener({ matches: false } as any));
     });
 
     expect(screen.getByTestId('active').textContent).toBe('dark');
-    expect(screen.getByTestId('applied').textContent).toBe('dark'); // Stays dark
+    expect(screen.getByTestId('applied').textContent).toBe('dark');
   });
 
-  // Verify non-functional performance requirement: Split Context optimization!
   it('guarantees components consuming only actions do not re-render on theme changes', () => {
     const rendersRef = { current: 0 };
     
@@ -160,7 +154,6 @@ describe('Theme Switcher System', () => {
       );
     };
 
-    // Component consuming state to force updates in state providers
     const StateConsumerComponent = () => {
       const state = useTheme();
       return <div data-testid="state-display">{state.currentTheme}</div>;
@@ -173,14 +166,11 @@ describe('Theme Switcher System', () => {
       </ThemeProvider>
     );
 
-    // Initial render counts as 1
     expect(rendersRef.current).toBe(1);
 
-    // Click button to change theme state
     fireEvent.click(screen.getByTestId('trigger-btn'));
 
     expect(screen.getByTestId('state-display').textContent).toBe('forest');
-    // The ActionsOnlyComponent should NOT have re-rendered (should still be 1!)
     expect(rendersRef.current).toBe(1);
   });
 });
