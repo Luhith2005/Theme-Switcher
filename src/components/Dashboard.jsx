@@ -1,11 +1,10 @@
 import React, { useState, useMemo, useRef, useEffect } from 'react';
 import { useTheme, useThemeActions } from '../hooks/useTheme';
-import type { ThemeOption } from '../types/theme';
 import { Customizer } from './Customizer';
 import { RenderVisualizer } from './RenderVisualizer';
 import { PaintbrushIcon, VolumeIcon } from './Icons';
 
-export const MemoizedCard: React.FC = React.memo(() => {
+export const MemoizedCard = React.memo(() => {
   const renders = useRef(0);
   renders.current += 1;
 
@@ -23,7 +22,7 @@ export const MemoizedCard: React.FC = React.memo(() => {
   );
 });
 
-export const SurfaceTokensCard: React.FC = () => {
+export const SurfaceTokensCard = () => {
   const renders = useRef(0);
   renders.current += 1;
 
@@ -41,7 +40,7 @@ export const SurfaceTokensCard: React.FC = () => {
   );
 };
 
-export const Dashboard: React.FC = () => {
+export const Dashboard = () => {
   const state = useTheme();
   const actions = useThemeActions();
   const [showDevPanel, setShowDevPanel] = useState(false);

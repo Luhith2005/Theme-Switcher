@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { useTheme } from '../hooks/useTheme';
 
-export const RenderCounterBadge: React.FC<{ name: string }> = ({ name }) => {
+export const RenderCounterBadge = ({ name }) => {
   const renders = useRef(0);
   renders.current += 1;
 
@@ -37,23 +37,16 @@ export const RenderCounterBadge: React.FC<{ name: string }> = ({ name }) => {
   );
 };
 
-interface RenderLogEntry {
-  id: string;
-  time: string;
-  message: string;
-  type: 'theme' | 'state' | 'action';
-}
-
-export const RenderVisualizer: React.FC = () => {
+export const RenderVisualizer = () => {
   const state = useTheme();
-  const [logs, setLogs] = useState<RenderLogEntry[]>([]);
+  const [logs, setLogs] = useState([]);
   const renderCount = useRef(0);
   renderCount.current += 1;
 
   const lastTheme = useRef(state.currentTheme);
   useEffect(() => {
     const time = new Date().toLocaleTimeString();
-    const entry: RenderLogEntry = {
+    const entry = {
       id: Math.random().toString(),
       time,
       message: `Theme updated to "${state.currentTheme.toUpperCase()}" (Preference: "${state.activeTheme}")`,

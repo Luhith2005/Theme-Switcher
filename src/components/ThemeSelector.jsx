@@ -1,6 +1,5 @@
 import React from 'react';
 import { useTheme, useThemeActions } from '../hooks/useTheme';
-import type { ThemeOption } from '../types/theme';
 import { 
   SunIcon, 
   MoonIcon, 
@@ -12,16 +11,7 @@ import {
 } from './Icons';
 import { RenderCounterBadge } from './RenderVisualizer';
 
-interface ThemeCardProps {
-  id: ThemeOption;
-  label: string;
-  description: string;
-  icon: React.ReactNode;
-  isActive: boolean;
-  onClick: () => void;
-}
-
-const ThemeCard: React.FC<ThemeCardProps> = ({ 
+const ThemeCard = ({ 
   id, 
   label, 
   description, 
@@ -76,49 +66,49 @@ const ThemeCard: React.FC<ThemeCardProps> = ({
   );
 };
 
-export const ThemeSelector: React.FC = () => {
+export const ThemeSelector = () => {
   const { activeTheme } = useTheme();
   const { setTheme } = useThemeActions();
 
   const themesList = [
     {
-      id: 'system' as ThemeOption,
+      id: 'system',
       label: 'System Sync',
       description: 'Matches OS preferences dynamically',
       icon: <MonitorIcon size={20} />,
     },
     {
-      id: 'light' as ThemeOption,
+      id: 'light',
       label: 'Light Mode',
       description: 'Soft crisp colors, high contrast',
       icon: <SunIcon size={20} />,
     },
     {
-      id: 'dark' as ThemeOption,
+      id: 'dark',
       label: 'Dark Mode',
       description: 'Cool slate colors, reduced strain',
       icon: <MoonIcon size={20} />,
     },
     {
-      id: 'midnight' as ThemeOption,
+      id: 'midnight',
       label: 'Midnight Spark',
       description: 'High saturation, rich neon purple',
       icon: <SparklesIcon size={20} />,
     },
     {
-      id: 'forest' as ThemeOption,
+      id: 'forest',
       label: 'Forest Calm',
       description: 'Muted natural greens and cream text',
       icon: <TreeIcon size={20} />,
     },
     {
-      id: 'cyberpunk' as ThemeOption,
+      id: 'cyberpunk',
       label: 'Cyberpunk 2099',
       description: 'High energy electric neon yellow',
       icon: <TerminalIcon size={20} />,
     },
     {
-      id: 'custom' as ThemeOption,
+      id: 'custom',
       label: 'Custom Builder',
       description: 'Craft your own HSL parameters',
       icon: <PaintbrushIcon size={20} />,

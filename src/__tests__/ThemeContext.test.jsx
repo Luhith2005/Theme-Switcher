@@ -4,21 +4,10 @@ import { render, screen, fireEvent, act } from '@testing-library/react';
 import { ThemeProvider } from '../context/ThemeContext';
 import { useTheme, useThemeActions } from '../hooks/useTheme';
 
-interface MockMediaQueryList {
-  matches: boolean;
-  media: string;
-  onchange: null | ((e: any) => void);
-  addListener: ReturnType<typeof vi.fn>;
-  removeListener: ReturnType<typeof vi.fn>;
-  addEventListener: ReturnType<typeof vi.fn>;
-  removeEventListener: ReturnType<typeof vi.fn>;
-  dispatchEvent: ReturnType<typeof vi.fn>;
-}
-
-let matchMediaListeners: ((e: any) => void)[] = [];
+let matchMediaListeners = [];
 let isSystemDark = false;
 
-const mockMatchMedia = (query: string): MockMediaQueryList => {
+const mockMatchMedia = (query) => {
   const matches = query.includes('prefers-color-scheme: dark') ? isSystemDark : false;
   return {
     matches,
@@ -116,7 +105,7 @@ describe('Theme Switcher System', () => {
 
     isSystemDark = true;
     act(() => {
-      matchMediaListeners.forEach(listener => listener({ matches: true } as any));
+      matchMediaListeners.forEach(listener => listener({ matches: true }));
     });
 
     expect(screen.getByTestId('applied').textContent).toBe('dark');
@@ -134,7 +123,7 @@ describe('Theme Switcher System', () => {
 
     isSystemDark = false;
     act(() => {
-      matchMediaListeners.forEach(listener => listener({ matches: false } as any));
+      matchMediaListeners.forEach(listener => listener({ matches: false }));
     });
 
     expect(screen.getByTestId('active').textContent).toBe('dark');

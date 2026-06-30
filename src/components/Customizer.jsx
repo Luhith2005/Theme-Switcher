@@ -1,15 +1,9 @@
 import React from 'react';
 import { useTheme, useThemeActions } from '../hooks/useTheme';
-import type { CustomThemeColors } from '../types/theme';
 import { PaintbrushIcon } from './Icons';
 import { RenderCounterBadge } from './RenderVisualizer';
 
-interface CustomPreset {
-  name: string;
-  colors: CustomThemeColors;
-}
-
-const CUSTOM_PRESETS: CustomPreset[] = [
+const CUSTOM_PRESETS = [
   {
     name: 'Neon Velvet',
     colors: {
@@ -52,15 +46,15 @@ const CUSTOM_PRESETS: CustomPreset[] = [
   },
 ];
 
-export const Customizer: React.FC = () => {
+export const Customizer = () => {
   const { currentTheme, customThemeColors } = useTheme();
   const { updateCustomColors, setTheme } = useThemeActions();
 
-  const handleColorChange = (key: keyof CustomThemeColors, value: string) => {
+  const handleColorChange = (key, value) => {
     updateCustomColors({ [key]: value });
   };
 
-  const applyPreset = (presetColors: CustomThemeColors) => {
+  const applyPreset = (presetColors) => {
     updateCustomColors(presetColors);
     if (currentTheme !== 'custom') {
       setTheme('custom');
@@ -85,7 +79,7 @@ export const Customizer: React.FC = () => {
     }
   };
 
-  const colorLabels: Record<keyof CustomThemeColors, string> = {
+  const colorLabels = {
     primary: 'Primary Accent',
     background: 'Root Background',
     surface: 'Surface Card Background',
@@ -163,7 +157,7 @@ export const Customizer: React.FC = () => {
           <div className="pickers-section">
             <h4>Fine Tune Variable Colors</h4>
             <div className="pickers-list" style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {(Object.keys(customThemeColors) as Array<keyof CustomThemeColors>).map((key) => (
+              {Object.keys(customThemeColors).map((key) => (
                 <div key={key} className="picker-row" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
                   <label htmlFor={`color-${key}`} style={{ fontSize: '12px', color: 'var(--text-muted)' }}>
                     {colorLabels[key]}

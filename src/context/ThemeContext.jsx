@@ -1,12 +1,11 @@
 import React, { createContext, useState, useEffect, useMemo, useCallback, useRef } from 'react';
-import type { ThemeOption, ThemeType, CustomThemeColors, ThemeState, ThemeActions } from '../types/theme';
 
 const THEME_STORAGE_KEY = 'theme-switcher-pref';
 const CUSTOM_COLORS_KEY = 'theme-switcher-custom-colors';
 const ANIMATIONS_KEY = 'theme-switcher-animations';
 const SOUNDS_KEY = 'theme-switcher-sounds';
 
-const defaultCustomColors: CustomThemeColors = {
+const defaultCustomColors = {
   primary: '#d946ef',
   background: '#090514',
   surface: '#150d2a',
@@ -14,12 +13,12 @@ const defaultCustomColors: CustomThemeColors = {
   accent: '#06b6d4',
 };
 
-export const ThemeStateContext = createContext<ThemeState | undefined>(undefined);
-export const ThemeActionsContext = createContext<ThemeActions | undefined>(undefined);
+export const ThemeStateContext = createContext(undefined);
+export const ThemeActionsContext = createContext(undefined);
 
-const playClickSound = (type: 'on' | 'off') => {
+const playClickSound = (type) => {
   try {
-    const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+    const AudioContextClass = window.AudioContext || window.webkitAudioContext;
     if (!AudioContextClass) return;
     const ctx = new AudioContextClass();
     const osc = ctx.createOscillator();
@@ -48,18 +47,18 @@ const playClickSound = (type: 'on' | 'off') => {
   }
 };
 
-export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [activeTheme, setActiveThemeState] = useState<ThemeOption>(() => {
+export const ThemeProvider = ({ children }) => {
+  const [activeTheme, setActiveThemeState] = useState(() => {
     if (typeof window === 'undefined') return 'system';
     try {
       const stored = localStorage.getItem(THEME_STORAGE_KEY);
-      return (stored as ThemeOption) || 'system';
+      return stored || 'system';
     } catch {
       return 'system';
     }
   });
 
-  const [customThemeColors, setCustomThemeColorsState] = useState<CustomThemeColors>(() => {
+  const [customThemeColors, setCustomThemeColorsState] = useState(() => {
     if (typeof window === 'undefined') return defaultCustomColors;
     try {
       const stored = localStorage.getItem(CUSTOM_COLORS_KEY);
@@ -69,7 +68,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   });
 
-  const [animationsEnabled, setAnimationsEnabledState] = useState<boolean>(() => {
+  const [animationsEnabled, setAnimationsEnabledState] = useState(() => {
     if (typeof window === 'undefined') return true;
     try {
       const stored = localStorage.getItem(ANIMATIONS_KEY);
@@ -79,7 +78,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   });
 
-  const [soundsEnabled, setSoundsEnabledState] = useState<boolean>(() => {
+  const [soundsEnabled, setSoundsEnabledState] = useState(() => {
     if (typeof window === 'undefined') return true;
     try {
       const stored = localStorage.getItem(SOUNDS_KEY);
@@ -89,17 +88,17 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   });
 
-  const [systemDark, setSystemDark] = useState<boolean>(() => {
+  const [systemDark, setSystemDark] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(prefers-color-scheme: dark)').matches;
   });
 
-  const [reducedMotion, setReducedMotion] = useState<boolean>(() => {
+  const [reducedMotion, setReducedMotion] = useState(() => {
     if (typeof window === 'undefined') return false;
     return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   });
 
-  const currentTheme = useMemo<ThemeType>(() => {
+  const currentTheme = useMemo(() => {
     if (activeTheme === 'system') {
       return systemDark ? 'dark' : 'light';
     }
@@ -114,7 +113,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
-    const handleSystemThemeChange = (e: MediaQueryListEvent) => {
+    const handleSystemThemeChange = (e) => {
       setSystemDark(e.matches);
     };
     if (mediaQuery.addEventListener) {
@@ -134,7 +133,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   useEffect(() => {
     if (typeof window === 'undefined') return;
     const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const handleMotionChange = (e: MediaQueryListEvent) => {
+    const handleMotionChange = (e) => {
       setReducedMotion(e.matches);
     };
     if (motionQuery.addEventListener) {
@@ -187,7 +186,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, [currentTheme, customThemeColors, animationsEnabled, reducedMotion]);
 
-  const setTheme = useCallback((theme: ThemeOption) => {
+  const setTheme = useCallback((theme) => {
     setActiveThemeState(theme);
     try {
       localStorage.setItem(THEME_STORAGE_KEY, theme);
@@ -199,7 +198,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     }
   }, []);
 
-  const updateCustomColors = useCallback((colors: Partial<CustomThemeColors>) => {
+  const updateCustomColors = useCallback((colors) => {
     setCustomThemeColorsState((prev) => {
       const updated = { ...prev, ...colors };
       try {
@@ -245,7 +244,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     setTheme('system');
   }, [setTheme]);
 
-  const stateValue = useMemo<ThemeState>(() => ({
+  const stateValue = useMemo(() => ({
     activeTheme,
     currentTheme,
     customThemeColors,
@@ -254,7 +253,7 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
     reducedMotion,
   }), [activeTheme, currentTheme, customThemeColors, animationsEnabled, soundsEnabled, reducedMotion]);
 
-  const actionsValue = useMemo<ThemeActions>(() => ({
+  const actionsValue = useMemo(() => ({
     setTheme,
     updateCustomColors,
     toggleAnimations,

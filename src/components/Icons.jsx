@@ -1,10 +1,6 @@
 import React from 'react';
 
-interface IconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number;
-}
-
-export const SunIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const SunIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -23,7 +19,7 @@ export const SunIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const MoonIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const MoonIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -41,7 +37,7 @@ export const MoonIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const MonitorIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const MonitorIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -60,7 +56,7 @@ export const MonitorIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const SparklesIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const SparklesIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -79,7 +75,7 @@ export const SparklesIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const TreeIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const TreeIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -99,7 +95,7 @@ export const TreeIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const TerminalIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const TerminalIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -117,7 +113,7 @@ export const TerminalIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const PaintbrushIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const PaintbrushIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -136,7 +132,7 @@ export const PaintbrushIcon: React.FC<IconProps> = ({ size = 20, ...props }) => 
   </svg>
 );
 
-export const SettingsIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const SettingsIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -154,7 +150,7 @@ export const SettingsIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const ChartIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const ChartIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -173,7 +169,7 @@ export const ChartIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const ListIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const ListIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -195,7 +191,7 @@ export const ListIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const VolumeIcon: React.FC<IconProps & { muted?: boolean }> = ({ size = 20, muted = false, ...props }) => (
+export const VolumeIcon = ({ size = 20, muted = false, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -224,7 +220,7 @@ export const VolumeIcon: React.FC<IconProps & { muted?: boolean }> = ({ size = 2
   </svg>
 );
 
-export const PlayIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const PlayIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -241,7 +237,7 @@ export const PlayIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const CheckIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const CheckIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -258,7 +254,7 @@ export const CheckIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const PlusIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const PlusIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
@@ -276,7 +272,7 @@ export const PlusIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
   </svg>
 );
 
-export const TrashIcon: React.FC<IconProps> = ({ size = 20, ...props }) => (
+export const TrashIcon = ({ size = 20, ...props }) => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width={size}
