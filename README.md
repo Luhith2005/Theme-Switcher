@@ -4,11 +4,11 @@ Chroma Theme Lab is a high-fidelity, production-grade global theming system buil
 
 ## Core Features
 
-- **Pill Theme Toggle**: Easily toggle between **Light**, **Dark**, and **System** sync preferences.
+- **Pill Theme Toggle**: Toggle between **Light**, **Dark**, and **System** sync preferences.
 - **OS Theme Integration**: Automatically matches system colors and listens for runtime OS preference transitions.
 - **No-Flash Painting**: Employs a synchronous inline script in `index.html` executing before the DOM paints to fetch preferences and append the appropriate class, resolving initial load flash.
-- **Responsive Layout**: Designed with a clean visual matching scheme, cards, responsive sidebars, custom checkboxes, forms, and alerts.
-- **Web Audio FX**: Incorporates soft, mechanical toggle sounds synthesized natively via Web Audio API oscillators.
+- **Responsive Layout**: Designed with a clean visual matching scheme, cards, responsive sidebars, custom checkboxes, and status displays matching the design mockups.
+- **Web Audio FX**: Soft mechanical toggle sounds synthesized natively via Web Audio API oscillators.
 - **Dev Sandbox Panel**:
   - **Render Performance Visualizer**: Live log logger and component ref trackers showing real-time render counts.
   - **Custom Variables Customizer**: Sliders allowing developers to tweak color variables (`background`, `primary`, `surface`, `accent`, `text`) dynamically on a Custom Theme and export code directly.
@@ -22,8 +22,6 @@ The application utilizes a **split-context pattern** to isolate rendering bounda
 
 ## CLI Scripts
 
-Initialize, compile, run, and test commands:
-
 ### Setup & Run
 ```bash
 # Install packages
@@ -35,9 +33,6 @@ npm run dev
 
 ### Checks & Tests
 ```bash
-# Verify TypeScript type checks
-npx tsc --noEmit
-
 # Run Vitest unit tests
-npx vitest run
+npm run test
 ```
